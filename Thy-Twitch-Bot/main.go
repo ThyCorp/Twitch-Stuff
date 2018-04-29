@@ -3,11 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/ThyCorp/Twitch-Stuff/Thy-Twitch-Bot/pkg"
+	"github.com/ThyCorp/Twitch-Stuff/Thy-Twitch-Bot/pkg/bot"
 	"io/ioutil"
 	"os"
 	"strings"
-
-	"github.com/ThyCorp/Twitch-Stuff/Thy-Twitch-Bot/pkg/bot"
 )
 
 func main() {
