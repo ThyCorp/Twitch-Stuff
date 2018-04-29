@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-
+	PassFinder()
 	//Parse command line arguments
 	flag.Parse()
 	command := flag.Arg(0)

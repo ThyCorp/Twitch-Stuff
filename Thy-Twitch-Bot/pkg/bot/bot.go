@@ -29,8 +29,8 @@ NewBot creates a new Bot with the default parameters
 */
 func NewBot() *Bot {
 	return &Bot{
-		server:  "irc.chat.twitch.tv",
-		port:    "6667",
+		server:  "irc-ws.chat.twitch.tv",
+		port:    "443",
 		name:    "TheTechTerrorist",
 		channel: "TheTechTerroriost",
 		conn:    nil,
@@ -43,7 +43,7 @@ Connect to the chatroom
 func (bot *Bot) Connect() {
 	var err error
 	fmt.Printf("Connecting to %s channel\n", bot.channel)
-	bot.conn, err = net.Dial("tcp", bot.server+":"+bot.port)
+	bot.conn, err = net.Dial("wss://"+bot.server+":"+bot.port+"/", "irc")
 	fmt.Printf("before %s\n", bot.channel)
 	if err != nil {
 		fmt.Printf("Cannot connect to channel, retrying")
