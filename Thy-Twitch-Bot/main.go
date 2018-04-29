@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/ThyCorp/Twitch-Stuff/Thy-Twitch-Bot/pkg"
 	"github.com/ThyCorp/Twitch-Stuff/Thy-Twitch-Bot/pkg/bot"
 	"io/ioutil"
 	"os"
@@ -45,4 +44,21 @@ func runBot() {
 
 	//run forever :)
 	ircbot.Start()
+}
+
+func PassFinder() {
+	filename := "twitch_pass.txt"
+	in := bufio.NewReader(os.Stdin)
+	fmt.Println("Enter Pass")
+	u1, err := in.ReadString('\n')
+	if err != nil {
+		fmt.Println("Somthing Went Wrong Rerun")
+		os.Exit(1)
+	}
+	file, err := os.Create(filename)
+	if err != nil {
+		fmt.Println("error At File Create")
+		os.Exit(1)
+	}
+	file.WriteString(u1)
 }
