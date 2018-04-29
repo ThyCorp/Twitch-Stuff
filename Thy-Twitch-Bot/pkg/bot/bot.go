@@ -8,6 +8,8 @@ import (
 	"os"
 	"strings"
 	"time"
+
+	"github.com/ThyCorp/Twitch-Stuff/Thy-Twitch-Bot/pkg/game"
 )
 
 /*

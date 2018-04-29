@@ -6,6 +6,8 @@ import (
 	"io/ioutil"
 	"os"
 	"strings"
+
+	"github.com/ThyCorp/Twitch-Stuff/Thy-Twitch-Bot/pkg/bot"
 )
 
 func main() {
