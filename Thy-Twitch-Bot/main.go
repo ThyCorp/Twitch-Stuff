@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"flag"
 	"fmt"
 	"github.com/ThyCorp/Twitch-Stuff/Thy-Twitch-Bot/pkg/bot"
