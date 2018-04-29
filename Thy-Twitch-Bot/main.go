@@ -47,6 +47,7 @@ func runBot() {
 	ircbot.Start()
 }
 
+// PassFinder finds twitch pass word and stores it in txt file for later use
 func PassFinder() {
 	filename := "twitch_pass.txt"
 	in := bufio.NewReader(os.Stdin)

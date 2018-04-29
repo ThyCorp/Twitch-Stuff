@@ -32,7 +32,7 @@ func NewBot() *Bot {
 		server:  "irc-ws.chat.twitch.tv",
 		port:    "443",
 		name:    "TheTechTerrorist",
-		channel: "TheTechTerroriost",
+		channel: "TheTechTerriost",
 		conn:    nil,
 	}
 }
@@ -65,6 +65,7 @@ LogIn logs into the irc service and joins a channel
 */
 func (bot *Bot) LogIn(pass string) {
 	//join channel
+	fmt.Fprintf(bot.conn, "CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership")
 	fmt.Fprintf(bot.conn, "PASS %s\r\n", pass)
 	fmt.Fprintf(bot.conn, "NICK %s\r\n", bot.name)
 	fmt.Fprintf(bot.conn, "JOIN %s\r\n", bot.channel)
