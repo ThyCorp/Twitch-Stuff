@@ -31,8 +31,8 @@ func NewBot() *Bot {
 	return &Bot{
 		server:  "irc.chat.twitch.tv",
 		port:    "6667",
-		name:    "trofiebot",
-		channel: "#3ygun",
+		name:    "TheTechTerrorist",
+		channel: "TheTechTerroriost",
 		conn:    nil,
 	}
 }
@@ -101,6 +101,7 @@ func (bot *Bot) ConsoleInput() {
 AutoMessage prints a string to chat
 */
 func (bot *Bot) AutoMessage() {
+
 	for {
 		bot.Message("30 seconds has passed")
 		time.Sleep(30 * time.Second)
