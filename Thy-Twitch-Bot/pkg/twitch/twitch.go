@@ -9,7 +9,7 @@ import (
 	"strconv"
 
 	"fmt"
-	"github.com/markbates/goth"
+	"github.com/ThyCorp/Twitch-Stuff/Thy-Twitch-Bot/pkg/goth"
 	"golang.org/x/oauth2"
 )
 
@@ -116,8 +116,6 @@ func (p *Provider) FetchUser(session goth.Session) (goth.User, error) {
 		RefreshToken: s.RefreshToken,
 		ExpiresAt:    s.ExpiresAt,
 	}
-
-	j
 
 	if user.AccessToken == "" {
 		// data is not yet retrieved since accessToken is still empty

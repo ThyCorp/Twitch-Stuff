@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/markbates/goth"
+	"github.com/ThyCorp/Twitch-Stuff/Thy-Twitch-Bot/pkg/goth"
 )
 
 // Session stores data during the auth process with Twitch
