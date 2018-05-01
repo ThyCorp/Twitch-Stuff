@@ -68,7 +68,7 @@ func PassFinder() {
 
 //Auth() finds Auth pass pass
 func Auth() string {
-	filename := "twitch_pass.txt"
+	filename := "/storage/twitch_pass.txt"
 	if _, err := os.Stat(filename); os.IsNotExist(err) {
 		in := bufio.NewReader(os.Stdin)
 		fmt.Println("Enter In Auth-Token")
@@ -91,7 +91,7 @@ func Auth() string {
 
 // CidFinder() Find Channel Id From Id() and Puts it In A Txt File
 func CidFinder() {
-	filename := "chan_id.txt"
+	filename := "/storage/chan_id.txt"
 	pass := Id()
 	file, err := os.Create(filename)
 	if err != nil {

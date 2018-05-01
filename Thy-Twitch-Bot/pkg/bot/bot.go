@@ -3,6 +3,7 @@ package bot
 import (
 	"bufio"
 	"fmt"
+	"io/ioutil"
 	"net"
 	"net/textproto"
 	"os"
@@ -28,19 +29,8 @@ type Bot struct {
 NewBot creates a new Bot with the default parameters
 */
 func NewBot() *Bot {
-	r := bufio.NewReader(os.Stdin)
-	stringone := "What Is Your Username No Caps?"
-	stringtwo := "What What Channel Would You Like To Connect To No Caps?"
-	fmt.Println(stringone)
-	name, err := r.ReadString('\n')
-	if err != nil {
-		fmt.Println("bot.go, line 32")
-	}
-	fmt.Println(stringtwo)
-	channel, err := r.ReadString('\n')
-	if err != nil {
-		fmt.Println("bot.go, line 36")
-	}
+	name := UsrName()
+	channel := ConedChan()
 	channel = "#" + channel
 	return &Bot{
 		server:  "irc.chat.twitch.tv",
@@ -49,6 +39,66 @@ func NewBot() *Bot {
 		channel: channel,
 		conn:    nil,
 	}
+}
+
+func UsrName() string {
+	filename := "/storage/Username.txt"
+	string1 := "What Is Your Username No Caps?"
+	if _, err := os.Stat(filename); os.IsNotExist(err) {
+		file, err := os.Create(filename)
+		if err != nil {
+			fmt.Println("bot.go line 48")
+			os.Exit(1)
+		}
+		in := bufio.NewReader(os.Stdin)
+		fmt.Println(string1)
+		o, err := in.ReadString('\n')
+		if err != nil {
+			fmt.Println("bot.go line 60")
+			os.Exit(1)
+		}
+		file.WriteString(o)
+		return o
+	} else {
+		op, err := ioutil.ReadFile(filename)
+		if err != nil {
+			fmt.Println("bot.go line 68")
+			os.Exit(1)
+		}
+		o := string(op)
+		return o
+	}
+
+}
+
+func ConedChan() string {
+	filename := "/storage/ConnectedChannel.txt"
+	string1 := "What What Channel Would You Like To Connect To No Caps?"
+	if _, err := os.Stat(filename); os.IsNotExist(err) {
+		file, err := os.Create(filename)
+		if err != nil {
+			fmt.Println("bot.go line 78")
+			os.Exit(1)
+		}
+		in := bufio.NewReader(os.Stdin)
+		fmt.Println(string1)
+		o, err := in.ReadString('\n')
+		if err != nil {
+			fmt.Println("bot.go line 85")
+			os.Exit(1)
+		}
+		file.WriteString(o)
+		return o
+	} else {
+		op, err := ioutil.ReadFile(filename)
+		if err != nil {
+			fmt.Println("bot.go line 93")
+			os.Exit(1)
+		}
+		o := string(op)
+		return o
+	}
+
 }
 
 /*
