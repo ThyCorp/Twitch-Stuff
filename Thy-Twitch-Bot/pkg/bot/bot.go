@@ -73,7 +73,7 @@ func (bot *Bot) Close() {
 /*
 LogIn logs into the irc service and joins a channel
 */
-func (bot *Bot) LogIn(pass string, id string) {
+func (bot *Bot) LogIn(pass string, id int) {
 	//join channel
 	fmt.Fprintf(bot.conn, " PASS %s\r\n", pass)
 	fmt.Fprintf(bot.conn, " NICK %s\r\n", bot.name)
