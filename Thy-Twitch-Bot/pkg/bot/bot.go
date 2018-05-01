@@ -31,7 +31,7 @@ func NewBot() *Bot {
 	return &Bot{
 		server:  "irc.chat.twitch.tv",
 		port:    "6667",
-		name:    "thetechterriost",
+		name:    "#thetechterriost",
 		channel: "TheTechTerriost",
 		conn:    nil,
 	}
