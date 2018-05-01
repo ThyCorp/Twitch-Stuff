@@ -32,14 +32,14 @@ func runBot() {
 	go ircbot.ConsoleInput()
 	ircbot.Connect()
 	//Find Channel Id For Chatroom
-	chanidpre, err := ioutil.ReadFile("chan_id.txt")
+	chanidpre, err := ioutil.ReadFile("/storage/chan_id.txt")
 	if err != nil {
 		fmt.Println("Error reading from chan_id.txt.  Maybe it isn't created?")
 		os.Exit(1)
 	}
 	chanid := bytes.IndexByte(chanidpre, 0)
 	//authenticating w/ twitch auth token
-	pass1, err := ioutil.ReadFile("twitch_pass.txt")
+	pass1, err := ioutil.ReadFile("/storage/itch_pass.txt")
 	if err != nil {
 		fmt.Println("Error reading from twitch_pass.txt.  Maybe it isn't created?")
 		os.Exit(1)
