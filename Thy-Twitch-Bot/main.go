@@ -61,18 +61,29 @@ func PassFinder() {
 
 //Auth() finds Auth pass pass
 func Auth() string {
-	Open()
-	in := bufio.NewReader(os.Stdin)
-	fmt.Println("Enter In Auth-Token")
-	o, err := in.ReadString('\n')
-	if err != nil {
-		fmt.Println("Didn't Get That")
-		os.Exit(1)
+	filename := "twitch_pass.txt"
+	if _, err := os.Stat(filename); os.IsNotExist(err) {
+		Open()
+		in := bufio.NewReader(os.Stdin)
+		fmt.Println("Enter In Auth-Token")
+		o, err := in.ReadString('\n')
+		if err != nil {
+			fmt.Println("Didn't Get That")
+			os.Exit(1)
+		}
+		return o
+	} else {
+		op, err := ioutil.ReadFile("twitch_pass.txt")
+		if err != nil {
+			fmt.Println("main.go line 84")
+		}
+		o := string(op)
+		return o
 	}
-	return o
+
 }
 
 //Open() Opens Default Web Browser
 func Open() {
-	exec.Command("xdg-open ", "https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=avq1j7x3f8s9dzesyq67s7nfa8hccm&redirect_uri=http://localhost&scope=channel_feed_read+channel_feed_edit&state=a1rrg32a45m8nsx3pfukudymcvgf0x")
+	exec.Command("xdg-open ", "'https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=avq1j7x3f8s9dzesyq67s7nfa8hccm&redirect_uri=http://localhost&scope=channel_feed_read+channel_feed_edit&state=a1rrg32a45m8nsx3pfukudymcvgf0x'")
 }

@@ -28,11 +28,21 @@ type Bot struct {
 NewBot creates a new Bot with the default parameters
 */
 func NewBot() *Bot {
+	r := bufio.NewReader(os.Stdin)
+	name, err := r.ReadString('\n')
+	if err != nil {
+		fmt.Println("bot.go, line 32")
+	}
+	channel, err := r.ReadString('\n')
+	if err != nil {
+		fmt.Println("bot.go, line 36")
+	}
+	channel = "#" + channel
 	return &Bot{
 		server:  "irc.chat.twitch.tv",
 		port:    "6667",
-		name:    "techterror12",
-		channel: "#techterror12",
+		name:    name,
+		channel: channel,
 		conn:    nil,
 	}
 }
@@ -65,10 +75,10 @@ LogIn logs into the irc service and joins a channel
 */
 func (bot *Bot) LogIn(pass string) {
 	//join channel
-	fmt.Fprintf(bot.conn, "CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership")
-	fmt.Fprintf(bot.conn, "PASS %s\r\n", pass)
-	fmt.Fprintf(bot.conn, "NICK %s\r\n", bot.name)
-	fmt.Fprintf(bot.conn, "JOIN %s\r\n", bot.channel)
+	fmt.Fprintf(bot.conn, " CAP REQ :twitch.tv/tags twitch.tv/commands twitch.tv/membership ")
+	fmt.Fprintf(bot.conn, " PASS %s\r\n ", pass)
+	fmt.Fprintf(bot.conn, " NICK %s\r\n ", bot.name)
+	fmt.Fprintf(bot.conn, " JOIN %s\r\n ", bot.channel)
 }
 
 /*
