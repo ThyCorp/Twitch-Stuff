@@ -66,7 +66,7 @@ func PassFinder() {
 	file.WriteString(pass)
 }
 
-//Auth() finds Auth pass pass
+//Auth finds Auth pass pass
 func Auth() string {
 	filename := "/storage/twitch_pass.txt"
 	if _, err := os.Stat(filename); os.IsNotExist(err) {
@@ -89,10 +89,10 @@ func Auth() string {
 
 }
 
-// CidFinder() Find Channel Id From Id() and Puts it In A Txt File
+// CidFinder Find Channel Id From Id() and Puts it In A Txt File
 func CidFinder() {
 	filename := "/storage/chan_id.txt"
-	pass := Id()
+	pass := ID()
 	file, err := os.Create(filename)
 	if err != nil {
 		fmt.Println("Error At File Create Cid")
@@ -101,8 +101,8 @@ func CidFinder() {
 	file.WriteString(pass)
 }
 
-//Id() asks from value from user then give int to CidFinder()
-func Id() string {
+//ID asks from value from user then give int to CidFinder()
+func ID() string {
 	filename := "/storage/chan_id.txt"
 	if _, err := os.Stat(filename); os.IsNotExist(err) {
 		in := bufio.NewReader(os.Stdin)
