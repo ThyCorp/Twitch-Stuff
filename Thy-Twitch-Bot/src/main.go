@@ -56,7 +56,7 @@ func runBot() {
 
 // PassFinder finds twitch pass word and stores it in txt file for later use
 func PassFinder() {
-	filename := "twitch_pass.txt"
+	filename := "/storage/twitch_pass.txt"
 	pass := Auth()
 	file, err := os.Create(filename)
 	if err != nil {
@@ -103,7 +103,7 @@ func CidFinder() {
 
 //Id() asks from value from user then give int to CidFinder()
 func Id() string {
-	filename := "chan_id.txt"
+	filename := "/storage/chan_id.txt"
 	if _, err := os.Stat(filename); os.IsNotExist(err) {
 		in := bufio.NewReader(os.Stdin)
 		fmt.Println("Enter In Channel ID For Your Streams Chatroom")
