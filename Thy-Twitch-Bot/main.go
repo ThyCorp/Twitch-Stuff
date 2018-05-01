@@ -85,5 +85,5 @@ func Auth() string {
 
 //Open() Opens Default Web Browser
 func Open() {
-	exec.Command("xdg-open ", "'https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=avq1j7x3f8s9dzesyq67s7nfa8hccm&redirect_uri=http://localhost&scope=channel_feed_read+channel_feed_edit&state=a1rrg32a45m8nsx3pfukudymcvgf0x'")
+	exec.Command("xdg-open ", "'https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=avq1j7x3f8s9dzesyq67s7nfa8hccm&redirect_uri=http://localhost&scope=channel_feed_read+channel_feed_edit+chat_login&state=a1rrg32a45m8nsx3pfukudymcvgf0x'")
 }
