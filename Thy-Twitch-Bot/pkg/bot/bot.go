@@ -29,10 +29,14 @@ NewBot creates a new Bot with the default parameters
 */
 func NewBot() *Bot {
 	r := bufio.NewReader(os.Stdin)
+	stringone := "What Is Your Username No Caps?"
+	stringtwo := "What What Channel Would You Like To Connect To No Caps?"
+	fmt.Println(stringone)
 	name, err := r.ReadString('\n')
 	if err != nil {
 		fmt.Println("bot.go, line 32")
 	}
+	fmt.Println(stringtwo)
 	channel, err := r.ReadString('\n')
 	if err != nil {
 		fmt.Println("bot.go, line 36")
@@ -78,9 +82,8 @@ func (bot *Bot) LogIn(pass string, id int) {
 
 	fmt.Fprintf(bot.conn, " PASS %s\r\n", pass)
 	fmt.Fprintf(bot.conn, " NICK %s\r\n", bot.name)
-	fmt.Fprintf(bot.conn, " CAP REQ :twitch.tv/ twitch.tv/tagsmembership twitch.tv/commands%s\r\n")
+	fmt.Fprintf(bot.conn, " CAP REQ :twitch.tv/ twitch.tv/tagsmembership twitch.tv/commands")
 	fmt.Fprintf(bot.conn, " JOIN %s\r\n", bot.channel)
-	fmt.Fprintf(bot.conn, " JOIN #chatrooms:%s\r\n", id)
 }
 
 /*
