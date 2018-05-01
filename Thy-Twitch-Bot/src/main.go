@@ -13,6 +13,7 @@ import (
 
 func main() {
 	PassFinder()
+	CidFinder()
 	//Parse command line arguments
 	flag.Parse()
 	command := flag.Arg(0)
