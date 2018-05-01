@@ -62,7 +62,7 @@ func PassFinder() {
 
 //Auth() finds Auth pass pass
 func Auth() string {
-	Open("https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=avq1j7x3f8s9dzesyq67s7nfa8hccm&redirect_uri=http://localhost&scope=channel_feed_read+channel_feed_edit&state=a1rrg32a45m8nsx3pfukudymcvgf0x")
+	Open()
 	in := bufio.NewReader(os.Stdin)
 	fmt.Println("Enter In Auth-Token")
 	o, err := in.ReadString('\n')
@@ -74,6 +74,6 @@ func Auth() string {
 }
 
 //Open() Opens Default Web Browser
-func Open(input string) {
-	exec.Command("xdg-open", input)
+func Open() {
+	exec.Command("xdg-open ", "https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=avq1j7x3f8s9dzesyq67s7nfa8hccm&redirect_uri=http://localhost&scope=channel_feed_read+channel_feed_edit&state=a1rrg32a45m8nsx3pfukudymcvgf0x")
 }
