@@ -30,7 +30,6 @@ func runBot() {
 	ircbot := bot.NewBot()
 	go ircbot.ConsoleInput()
 	ircbot.Connect()
-	defer ircbot.Close()
 
 	//authenticating w/ twitch auth token
 	pass1, err := ioutil.ReadFile("twitch_pass.txt")
