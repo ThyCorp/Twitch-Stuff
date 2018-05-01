@@ -31,8 +31,8 @@ func NewBot() *Bot {
 	return &Bot{
 		server:  "irc.chat.twitch.tv",
 		port:    "6667",
-		name:    "#thetechterriost",
-		channel: "TheTechTerriost",
+		name:    "techterror12",
+		channel: "#techterror12",
 		conn:    nil,
 	}
 }
@@ -43,7 +43,7 @@ Connect to the chatroom
 func (bot *Bot) Connect() {
 	var err error
 	fmt.Printf("Connecting to %s channel\n", bot.channel)
-	bot.conn, err = net.Dial("tcp", "irc.chat.twitch.tv:6667")
+	bot.conn, err = net.Dial("tcp", bot.server+":"+bot.port)
 	fmt.Printf("before %s\n", bot.channel)
 	if err != nil {
 		fmt.Printf("Cannot connect to channel, retrying")
@@ -104,8 +104,8 @@ AutoMessage prints a string to chat
 func (bot *Bot) AutoMessage() {
 
 	for {
-		bot.Message("30 seconds has passed")
-		time.Sleep(30 * time.Second)
+		bot.Message("Don't Forget To Follow")
+		time.Sleep(600 * time.Second)
 	}
 }
 
