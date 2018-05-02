@@ -6,6 +6,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/ThyCorp/Twitch-Stuff/Thy-Twitch-Bot/pkg/bot"
+	"github.com/ThyCorp/Twitch-Stuff/Thy-Twitch-Bot/pkg/filefuncs"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -56,9 +57,10 @@ func runBot() {
 
 // PassFinder finds twitch pass word and stores it in txt file for later use
 func PassFinder() {
-	filename := "/storage/twitch_pass.txt"
+	foldername := "storage"
+	filename := "twitch_pass.txt"
+	file, err := os.Create(strings.Join([]string{foldername, filename}, "/"))
 	pass := Auth()
-	file, err := os.Create(filename)
 	if err != nil {
 		fmt.Println("error At File Create")
 		os.Exit(1)
@@ -68,9 +70,10 @@ func PassFinder() {
 
 //Auth finds Auth pass pass
 func Auth() string {
-	filename := "/storage/twitch_pass.txt"
-	if _, err := os.Stat(filename); os.IsNotExist(err) {
-		in := bufio.NewReader(os.Stdin)
+	foldername := "storage"
+	filename := "twitch_pass.txt"
+	in := bufio.NewReader(os.Stdin)
+	if filefuncs.Exists(foldername+filename) == false {
 		fmt.Println("Enter In Auth-Token")
 		o, err := in.ReadString('\n')
 		if err != nil {
@@ -79,7 +82,7 @@ func Auth() string {
 		}
 		return o
 	} else {
-		op, err := ioutil.ReadFile("twitch_pass.txt")
+		op, err := ioutil.ReadFile(strings.Join([]string{foldername, filename}, "/"))
 		if err != nil {
 			fmt.Println("main.go line 84")
 		}
@@ -91,9 +94,10 @@ func Auth() string {
 
 // CidFinder Find Channel Id From Id() and Puts it In A Txt File
 func CidFinder() {
-	filename := "/storage/chan_id.txt"
+	foldername := "/storage"
+	filename := "chan_id.txt"
 	pass := ID()
-	file, err := os.Create(filename)
+	file, err := os.Create(strings.Join([]string{foldername, filename}, "/"))
 	if err != nil {
 		fmt.Println("Error At File Create Cid")
 		os.Exit(1)
@@ -103,8 +107,9 @@ func CidFinder() {
 
 //ID asks from value from user then give int to CidFinder()
 func ID() string {
-	filename := "/storage/chan_id.txt"
-	if _, err := os.Stat(filename); os.IsNotExist(err) {
+	foldername := "/storage"
+	filename := "chan_id.txt"
+	if filefuncs.Exists(foldername+filename) == false {
 		in := bufio.NewReader(os.Stdin)
 		fmt.Println("Enter In Channel ID For Your Streams Chatroom")
 		o, err := in.ReadString('\n')
@@ -114,7 +119,7 @@ func ID() string {
 		}
 		return o
 	} else {
-		op, err := ioutil.ReadFile("chan_id.txt")
+		op, err := ioutil.ReadFile(strings.Join([]string{foldername, filename}, "/"))
 		if err != nil {
 			fmt.Println("main.go line 84")
 		}

@@ -3,14 +3,14 @@ package bot
 import (
 	"bufio"
 	"fmt"
+	"github.com/ThyCorp/Twitch-Stuff/Thy-Twitch-Bot/pkg/filefuncs"
+	"github.com/ThyCorp/Twitch-Stuff/Thy-Twitch-Bot/pkg/game"
 	"io/ioutil"
 	"net"
 	"net/textproto"
 	"os"
 	"strings"
 	"time"
-
-	"github.com/ThyCorp/Twitch-Stuff/Thy-Twitch-Bot/pkg/game"
 )
 
 /*
@@ -41,11 +41,15 @@ func NewBot() *Bot {
 	}
 }
 
+//UsrName finds users user name and stores it in a file
+//then returns that stored value
+//it also checks if said file exists or not to deside whether to ask the user
 func UsrName() string {
-	filename := "/storage/Username.txt"
+	foldername := "/storage"
+	filename := "Username.txt"
 	string1 := "What Is Your Username No Caps?"
-	if _, err := os.Stat(filename); os.IsNotExist(err) {
-		file, err := os.Create(filename)
+	if filefuncs.Exists(foldername+filename) == false {
+		file, err := os.Create(strings.Join([]string{foldername, filename}, "/"))
 		if err != nil {
 			fmt.Println("bot.go line 48")
 			os.Exit(1)
@@ -60,7 +64,7 @@ func UsrName() string {
 		file.WriteString(o)
 		return o
 	} else {
-		op, err := ioutil.ReadFile(filename)
+		op, err := ioutil.ReadFile(strings.Join([]string{foldername, filename}, "/"))
 		if err != nil {
 			fmt.Println("bot.go line 68")
 			os.Exit(1)
@@ -71,11 +75,15 @@ func UsrName() string {
 
 }
 
+// ConedChan finds what channel the user wants to conect to and stores it in a file
+//then returns that stored value
+//it also checks if said file exists or not to deside whether to ask the user
 func ConedChan() string {
-	filename := "/storage/ConnectedChannel.txt"
+	foldername := "/storage"
+	filename := "ConnectedChannel.txt"
 	string1 := "What What Channel Would You Like To Connect To No Caps?"
-	if _, err := os.Stat(filename); os.IsNotExist(err) {
-		file, err := os.Create(filename)
+	if filefuncs.Exists(foldername+filename) == false {
+		file, err := os.Create(strings.Join([]string{foldername, filename}, "/"))
 		if err != nil {
 			fmt.Println("bot.go line 78")
 			os.Exit(1)
@@ -90,7 +98,7 @@ func ConedChan() string {
 		file.WriteString(o)
 		return o
 	} else {
-		op, err := ioutil.ReadFile(filename)
+		op, err := ioutil.ReadFile(strings.Join([]string{foldername, filename}, "/"))
 		if err != nil {
 			fmt.Println("bot.go line 93")
 			os.Exit(1)
