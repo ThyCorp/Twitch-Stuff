@@ -10,7 +10,6 @@ import (
 	"time"
 
 	"github.com/ThyCorp/Twitch-Stuff/Thy-Twitch-Bot/pkg/game"
-	"github.com/ThyCorp/Twitch-Stuff/Thy-Twitch-Bot/pkg/id-finders"
 )
 
 /*
@@ -29,8 +28,8 @@ type Bot struct {
 NewBot creates a new Bot with the default parameters
 */
 func NewBot() *Bot {
-	name := id.UsrName()
-	channel := id.ConedChan()
+	name := "thetechterriost"
+	channel := "techterror12"
 	channel = "#" + channel
 	return &Bot{
 		server:  "irc.chat.twitch.tv",
