@@ -1,20 +1,17 @@
 package main
 
 import (
-	"bytes"
 	"flag"
 	"fmt"
-	"io/ioutil"
 	"os"
-	"strings"
+	"strconv"
 
-	"github.com/ThyCorp/Twitch-Stuff/Thy-Twitch-Bot/pkg/bot"
-	"github.com/ThyCorp/Twitch-Stuff/Thy-Twitch-Bot/pkg/id-finders"
+	"github.com/Techterror12/Twitch-Stuff/Thy-Twitch-Bot/pkg/bot"
+	"github.com/Techterror12/Twitch-Stuff/Thy-Twitch-Bot/pkg/info"
 )
 
 func main() {
-	id.PassFinder()
-	id.CidFinder()
+
 	//Parse command line arguments
 	flag.Parse()
 	command := flag.Arg(0)
@@ -32,23 +29,16 @@ func runBot() {
 	ircbot := bot.NewBot()
 	go ircbot.ConsoleInput()
 	ircbot.Connect()
-	//Find Channel Id For Chatroom
-	chanidpre, err := ioutil.ReadFile("/storage/chan_id.txt")
+	//finds four vars for connection
+	Botchan, OAuth := info.Info()
+	flag.Parse()
+	i, err := strconv.Atoi(Botchan)
 	if err != nil {
-		fmt.Println("Error reading from chan_id.txt.  Maybe it isn't created?")
-		os.Exit(1)
+		// handle error
+		fmt.Println(err)
+		os.Exit(2)
 	}
-	chanid := bytes.IndexByte(chanidpre, 0)
-	//authenticating w/ twitch auth token
-	pass1, err := ioutil.ReadFile("/storage/itch_pass.txt")
-	if err != nil {
-		fmt.Println("Error reading from twitch_pass.txt.  Maybe it isn't created?")
-		os.Exit(1)
-	}
-	pass := strings.Replace(string(pass1), "\n", "", 0)
-	fmt.Printf("The password used is: %s\r\n", string(pass))
-
-	ircbot.LogIn(pass, chanid)
+	ircbot.LogIn(OAuth, i)
 	go ircbot.AutoMessage()
 
 	//run forever :)

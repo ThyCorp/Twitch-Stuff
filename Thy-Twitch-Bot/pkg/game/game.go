@@ -8,13 +8,13 @@ import (
 type EmotemonGame struct {
 	emotemon *Emotemon
 	trainers map[string]*Emotemon
-	output chan<- string
+	output   chan<- string
 }
 
 func NewEmotemonGame(output chan<- string) *EmotemonGame {
-	return &EmotemonGame {
+	return &EmotemonGame{
 		trainers: make(map[string]*Emotemon),
-		output: output,
+		output:   output,
 	}
 }
 
@@ -25,14 +25,14 @@ func (game *EmotemonGame) Start() {
 		game.emotemon = NewEmotemon(capturer)
 
 		game.output <- game.emotemon.Found()
-		
+
 		//wait for emotemon to be captured
-		username := <- capturer
-		game.output <- game.emotemon.GetEmote() + " was captured: " + username
+		username := <-capturer
+		game.output <- game.emotemon.GetEmote() + "was captured by: " + username
 
 		game.trainers[username] = game.emotemon
 
-		time.Sleep(5 * time.Second)
+		time.Sleep(100 * time.Second)
 	}
 
 }
